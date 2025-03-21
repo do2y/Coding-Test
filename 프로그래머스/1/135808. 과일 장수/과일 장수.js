@@ -1,5 +1,5 @@
 function solution(k, m, score) {
-    score.sort((a,b) => b-a); //내림차순 정렬
+    score.sort((a,b) => b-a);
     let boxes = [];
     
     for(let i=0; i+m<=score.length;i=i+m){
@@ -9,8 +9,7 @@ function solution(k, m, score) {
     let sum = 0;
     boxes.forEach(box => {
         sum+=box[m-1]*m;
-    })
-    ;
+    });
     return sum;
 }
 
