@@ -11,7 +11,8 @@ function solution(n) {
                  break;
             }    
         }
-        isPrime ? cnt++ : cnt+=0;
+        
+        isPrime ? cnt++ : cnt+=0
         isPrime = true;
     }
     return cnt+1;
