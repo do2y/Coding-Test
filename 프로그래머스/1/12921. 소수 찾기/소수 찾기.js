@@ -12,7 +12,7 @@ function solution(n) {
             }    
         }
         
-        isPrime ? cnt++ : cnt+=0
+        isPrime ? cnt++ : cnt+=0;
         isPrime = true;
     }
     return cnt+1;
