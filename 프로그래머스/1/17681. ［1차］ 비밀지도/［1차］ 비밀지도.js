@@ -1,8 +1,8 @@
 function solution(n, arr1, arr2) {
     let answer = [];
     
-    let BinArr1 = arr1.map(v => v.toString(2).length == n ? v.toString(2) : v.toString(2).padStart(n,"0"));
-    let BinArr2 = arr2.map(v => v.toString(2).length == n ? v.toString(2) : v.toString(2).padStart(n,"0"));
+    let BinArr1 = arr1.map(v => v.toString(2).padStart(n,"0"));
+    let BinArr2 = arr2.map(v => v.toString(2).padStart(n,"0"));
     
     BinArr1.forEach((v,i) => {  
         let str = "";
