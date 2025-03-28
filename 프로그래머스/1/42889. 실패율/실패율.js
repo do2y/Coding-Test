@@ -1,7 +1,6 @@
 function solution(N, stages) {
     let answer = [];
 
-    stages.sort((a,b) => a-b);    
     let countMap = new Map();
     let failureArr = []; 
 
