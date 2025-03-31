@@ -1,21 +1,22 @@
 function solution(s) {
-    let answer = 1;
-    
+    let answer = 0;
     let same = 0, diff = 0;
-    let start = s[0];
-    
-    for(let i=0; i<s.length; i++){
-        if(start === s[i])
-            same++;
-        else
-            diff++;
-        
-        if(same == diff && i+1<s.length){
+    let start;
+
+    for (let i = 0; i < s.length; i++) {
+        if (same === 0 && diff === 0) start = s[i]; 
+
+        if (s[i] === start) same++;
+        else diff++;
+
+        if (same === diff) {
             answer++;
-            start = s[i+1];
-            console.log(start);
+            same = 0;
+            diff = 0;
         }
     }
-    
+
+    if (same !== 0 || diff !== 0) answer++;
+
     return answer;
 }
