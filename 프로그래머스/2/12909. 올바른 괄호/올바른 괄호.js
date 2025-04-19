@@ -10,5 +10,5 @@ function solution(s){
             return false;
     }
     
-    return check == 0 ? true : false;
+    return check == 0;
 }
