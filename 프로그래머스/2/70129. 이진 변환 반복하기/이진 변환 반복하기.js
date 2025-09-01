@@ -6,7 +6,7 @@ function solution(s) {
     while(s !== "1") {
         bin_cnt++;
         
-        const ones = (s.match(/1/g) || []).length; 
+        const ones = (s.match(/1/g).length); 
 
         del_zero_cnt += (s.length - ones);
         
