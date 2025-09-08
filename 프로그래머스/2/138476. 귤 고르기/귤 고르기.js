@@ -1,15 +1,13 @@
 function solution(k, tangerine) {
    
     tangerine.sort((a,b) => a-b);
-    const tangerineSet = new Set(tangerine);
-    
+  
     const tangerineCount = {};
     
     for (let size of tangerine) {
         if (!tangerineCount[size]) { 
             tangerineCount[size] = 0; 
         }
-    
         tangerineCount[size]++;
     }
     
