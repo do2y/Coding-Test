@@ -1,7 +1,5 @@
 function solution(k, tangerine) {
    
-    tangerine.sort((a,b) => a-b);
-  
     const tangerineCount = {};
     
     for (let size of tangerine) {
