@@ -3,17 +3,16 @@ function solution(k, tangerine) {
     const tangerineCount = {};
     
     for (let size of tangerine) {
-        if (!tangerineCount[size]) { 
-            tangerineCount[size] = 0; 
-        }
-        tangerineCount[size]++;
+        tangerineCount[size] = (tangerineCount[size] || 0) + 1;
     }
     
-    let sorted = Object.entries(tangerineCount).sort((a, b) => b[1] - a[1]);
+
+    const sorted = Object.values(tangerineCount).sort((a, b) => b - a);
+
     
     let sum = 0;
     let pickCount = 0;
-    for (let [size, count] of sorted) {
+    for (let count of sorted) {
         sum += count;
         pickCount++;
         if ( sum >= k )
