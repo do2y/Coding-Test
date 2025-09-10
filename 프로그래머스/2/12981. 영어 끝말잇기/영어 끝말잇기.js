@@ -1,24 +1,18 @@
 function solution(n, words) {
-    
-    let usedWords = new Set();
+    let usedWords = new Set([words[0]]);  
 
-    
-    for(let i=0; i<words.length; i++){
-        if (i===0) {
-            usedWords.add(words[0]);
-            continue;
-        }
-        
-        if (usedWords.has(words[i]) || words[i].length === 1
-            || words[i-1].charAt(words[i-1].length-1) !== words[i].charAt(0)) {
-            let player = (i%n) + 1;
-            let round = Math.floor(i/n) + 1;
-            
+    for (let i = 1; i < words.length; i++) {
+        const prev = words[i - 1];
+        const curr = words[i];
+
+        if (usedWords.has(curr) || curr.length === 1 || prev.charAt(prev.length - 1) !== curr.charAt(0)) {
+            let player = (i % n) + 1;            
+            let round = Math.floor(i / n) + 1;   
             return [player, round];
-        }    
-        usedWords.add(words[i]);
+        }
+
+        usedWords.add(curr); 
     }
-    
+
     return [0, 0];
-    
 }
