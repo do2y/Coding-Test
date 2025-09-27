@@ -1,13 +1,12 @@
 function solution(myString, pat) {
     
-    let str = "";
-    
-    for(let i=0; i<myString.length; i++) {
-        if(myString[i] === "A") 
-            str+="B";
+    const newPat = [...pat].reduce((a,c) => {
+        if(c === "A")
+            a += "B";
         else
-            str+="A";
-    }
+            a += "A";
+        return a;
+    }, "");
     
-    return str.match(pat) ? 1 : 0;
+    return myString.includes(newPat) ? 1: 0;
 }
