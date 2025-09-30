@@ -1,21 +1,22 @@
 function solution(s) {
     let answer = 0;
-    let bracketDict = {
+     let bracketDict = {
         "(": ")",
         "[": "]",
         "{": "}"
     };
-
-    for (let i = 0; i < s.length; i++) {
+    
+    for (let i=0; i < s.length; i++) {
+        
         let rotated = s.substring(i) + s.substring(0, i);
         
         let stack = [];
         let flag = 1;
         
         for (let ch of rotated) {
-            if (bracketDict[ch]) {
+            if (bracketDict[ch])
                 stack.push(ch);
-            } else {
+            else {
                 let last = stack.pop();
                 if (bracketDict[last] !== ch) {
                     flag = 0;
@@ -24,9 +25,10 @@ function solution(s) {
             }
         }
         
-        if (flag && stack.length === 0)
+        if (stack.length === 0 && flag === 1) 
             answer++;
     }
-
+    
     return answer;
+    
 }
