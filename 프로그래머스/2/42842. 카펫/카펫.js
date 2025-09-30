@@ -1,19 +1,14 @@
 function solution(brown, yellow) {
-
-    let width = 1;
-    let height = 1;
-    
-    for (height=1; height <= Math.sqrt(yellow); height++) {
+    for (let h = 1; h <= Math.sqrt(yellow); h++) {
+        if (yellow % h !== 0) continue;   
         
-        width = yellow / height;
+        let w = yellow / h; 
         
-        if (Number.isInteger(width)) {
-            if (( 2 * width ) + ( 2 * height ) + 4 === brown)
-                break;
-            else
-                continue;
+        let totalWidth = w + 2;
+        let totalHeight = h + 2;
+        
+        if (totalWidth * totalHeight === brown + yellow) {
+            return [totalWidth, totalHeight];
         }
-    
     }
-    return [ width + 2, height + 2 ];
 }
