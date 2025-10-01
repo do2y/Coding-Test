@@ -1,7 +1,6 @@
 function solution(n, left, right) {
     
     let arr = [];
-    let idx = left;
     
     for (; left<=right; left++) {
         
