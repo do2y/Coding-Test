@@ -6,9 +6,9 @@ function solution(progresses, speeds) {
     });
     
     let preWorkPeriod = workPeriodArr[0];
-    let count = 0;
+    let count = 1;
     
-    for (let i=0; i<workPeriodArr.length; i++) {
+    for (let i=1; i<workPeriodArr.length; i++) {
         let period = workPeriodArr[i];
         
         if (period <= preWorkPeriod) {
