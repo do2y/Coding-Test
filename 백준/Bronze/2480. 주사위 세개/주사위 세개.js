@@ -12,7 +12,7 @@ input.forEach((num) => {
   diceMap[num] = (diceMap[num] || 0) + 1;
 });
 
-let sameDice = Object.keys(diceMap).find((k) => diceMap[k] >= 2);
+let sameDice = Number(Object.keys(diceMap).find((k) => diceMap[k] >= 2));
 const values = Object.values(diceMap);
 let prize = 0;
 
