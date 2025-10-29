@@ -2,25 +2,18 @@ const fs = require("fs");
 const input = fs
   .readFileSync(process.platform === "linux" ? "/dev/stdin" : "input.txt")
   .toString()
-  .trim();
+  .trim()
+  .toUpperCase();
 
-const word = input;
-let alphabetCount = {};
+const alphabetCount = {};
 
-for (let i = 0; i < word.length; i++) {
-  alphabet = word[i].toUpperCase();
-
-  if (!alphabetCount[alphabet]) alphabetCount[alphabet] = 0;
-
-  alphabetCount[alphabet]++;
+for (const char of input) {
+  alphabetCount[char] = (alphabetCount[char] || 0) + 1;
 }
 
 const maxValue = Math.max(...Object.values(alphabetCount));
-const count = Object.values(alphabetCount).filter((v) => v === maxValue).length;
+const maxKeys = Object.keys(alphabetCount).filter(
+  (key) => alphabetCount[key] === maxValue
+);
 
-if (count === 1) {
-  const maxFrequencyChar = Object.keys(alphabetCount).find(
-    (k) => alphabetCount[k] === maxValue
-  );
-  console.log(maxFrequencyChar);
-} else console.log("?");
+console.log(maxKeys.length === 1 ? maxKeys[0] : "?");
