@@ -4,21 +4,15 @@ const input = fs
   .toString()
   .trim()
   .split(" ")
-  .join("");
+  .map(Number);
 
 let answer = "";
-const ascendingStr = input
-  .split("")
-  .sort((a, b) => a - b)
-  .join("");
+const ascendingStr = [...input].sort((a, b) => a - b).join("");
+const descendingStr = [...input].sort((a, b) => b - a).join("");
+const inputStr = input.join("");
 
-const decendingStr = input
-  .split("")
-  .sort((a, b) => b - a)
-  .join("");
-
-if (input === ascendingStr) answer = "ascending";
-else if (input === decendingStr) answer = "descending";
+if (inputStr === ascendingStr) answer = "ascending";
+else if (inputStr === descendingStr) answer = "descending";
 else answer = "mixed";
 
 console.log(answer);
