@@ -11,7 +11,7 @@ const n = input[0];
 const buildings = input.slice(1);
 
 let stack = [];
-let total = 0n;
+let total = 0;
 
 for (let i = 0; i < n; i++) {
   const height = buildings[i];
@@ -20,9 +20,9 @@ for (let i = 0; i < n; i++) {
     stack.pop();
   }
 
-  total += BigInt(stack.length);
+  total += stack.length;
 
   stack.push(height);
 }
 
-console.log(total.toString());
+console.log(total);
