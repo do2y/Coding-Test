@@ -1,23 +1,24 @@
 const fs = require("fs");
-let input = fs
-  .readFileSync(process.platform === "linux" ? "/dev/stdin" : "input.txt")
-  .toString()
-  .trim()
+const input = fs.readFileSync(0, "utf8").trim();
+
+const dices = input
   .split(" ")
-  .map(Number);
+  .map(Number)
+  .sort((a, b) => b - a);
 
-let diceMap = {};
-
-input.forEach((num) => {
-  diceMap[num] = (diceMap[num] || 0) + 1;
-});
-
-let sameDice = Number(Object.keys(diceMap).find((k) => diceMap[k] >= 2));
-const values = Object.values(diceMap);
+const check = [];
 let prize = 0;
+let sameDice = 0;
 
-if (values.includes(2)) prize = 1000 + sameDice * 100;
-else if (values.includes(3)) prize = 10000 + sameDice * 1000;
-else prize = Math.max(...input) * 100;
+for (let i = 0; i < 3; i++) {
+  if (!check.includes(dices[i])) check.push(dices[i]);
+  else sameDice = dices[i];
+}
+
+if (check.length === 1) {
+  prize = 10000 + sameDice * 1000;
+} else if (check.length === 2) {
+  prize = 1000 + sameDice * 100;
+} else prize = 100 * check[0];
 
 console.log(prize);
