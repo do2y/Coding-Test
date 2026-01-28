@@ -1,8 +1,6 @@
-const fs = require('fs');
-const input = fs.readFileSync(0, 'utf8').trim();
+const fs = require("fs");
+const input = fs.readFileSync(0, "utf8").trim();
 
-if (input === "") {
-  console.log(0);
-} else {
-  console.log(input.split(/\s+/).length);
-}
+const wordCount = input === "" ? 0 : input.split(" ").length;
+
+console.log(wordCount);
