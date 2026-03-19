@@ -1,9 +1,5 @@
 const fs = require("fs");
-const input = fs
-  .readFileSync(0, "utf8")
-  .trim()
-  .replaceAll(/\r/g, "")
-  .split("\n");
+const input = fs.readFileSync(0, "utf8").trim().split("\n");
 
 const str = input[0];
 const cmdCnt = +input[1];
