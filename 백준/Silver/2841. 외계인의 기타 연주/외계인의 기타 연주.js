@@ -13,27 +13,14 @@ let moves = 0;
 
 for (let i = 0; i < melody.length; i++) {
   let [line, fret] = melody[i].split(" ").map(Number);
-
   const stack = guitar[line] || (guitar[line] = []);
 
-  if (stack.length) {
-    let top = stack[stack.length - 1];
-    if (fret > top) {
-      stack.push(fret);
-      moves++;
-    } else {
-      while (fret < top && stack.length) {
-        stack.pop();
-        moves++;
-        top = stack[stack.length - 1];
-      }
+  while (stack.length && stack[stack.length - 1] > fret) {
+    stack.pop();
+    moves++;
+  }
 
-      if (!stack.length || fret > top) {
-        stack.push(fret);
-        moves++;
-      }
-    }
-  } else {
+  if (!stack.length || stack[stack.length - 1] < fret) {
     stack.push(fret);
     moves++;
   }
