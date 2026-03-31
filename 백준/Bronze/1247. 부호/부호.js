@@ -1,24 +1,18 @@
 const fs = require("fs");
-const input = fs
-  .readFileSync(0, "utf8")
-  .trim()
-  .replaceAll(/\r/g, "")
-  .split("\n")
-  .map(BigInt);
+const input = fs.readFileSync(0, "utf8").trim().split("\n").map(BigInt);
 
 const answer = [];
 let idx = 0;
+
 for (let i = 0; i < 3; i++) {
-  let N = Number(input[idx++]);
+  const N = Number(input[idx++]);
 
-  let numbers = input.slice(idx, idx + N);
-  idx += N;
+  let sum = 0n;
+  for (let j = 0; j < N; j++) {
+    sum += input[idx++];
+  }
 
-  let result = numbers.reduce((a, c) => a + c, 0n);
-
-  if (result > 0) answer.push("+");
-  else if (result < 0) answer.push("-");
-  else answer.push("0");
+  answer.push(sum > 0n ? "+" : sum < 0n ? "-" : "0");
 }
 
 console.log(answer.join("\n"));
