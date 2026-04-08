@@ -6,8 +6,11 @@ const input = fs
   .split("\n");
 
 const rawData = input.slice(1);
-const users = rawData.map((line) => line.split(" "));
+const users = rawData.map((line) => {
+  const [age, name] = line.split(" ");
+  return [Number(age), name];
+});
 
-users.sort((a, b) => Number(a[0]) - Number(b[0]));
+users.sort((a, b) => a[0] - b[0]);
 
 users.forEach((user) => console.log(`${user[0]} ${user[1]}`));
