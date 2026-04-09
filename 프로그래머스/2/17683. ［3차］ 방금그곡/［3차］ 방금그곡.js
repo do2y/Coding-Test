@@ -23,10 +23,7 @@ function solution(m, musicinfos) {
 
     if (matchedSongs.length === 0) return "(None)";
     else {
-        matchedSongs.sort((a, b) => {
-            if (b.playTime === a.playTime) return 0;
-            return b.playTime - a.playTime; 
-        });
+        matchedSongs.sort((a, b) => b.playTime - a.playTime);
                           
         return matchedSongs[0].title;
     }
