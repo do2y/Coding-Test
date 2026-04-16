@@ -1,29 +1,22 @@
 function solution(record) {
-   
-    let nicknameMap = new Map();
-    let result = [];
-    let answer = [];
+    const answer = [];
+    const nicknameMap = new Map();
     
-    for(let i=0; i<record.length; i++) {
-        let [action, id, nickname] = record[i].split(" ");
-        
+    for (let r of record) {
+        const [action, id, nickname] = r.split(" ");
+
         if (action === "Enter" || action === "Change") {
-            nicknameMap.set(id, nickname);
+          nicknameMap.set(id, nickname);
         }
-        
-        if (action === "Change") continue;
-        result.push([action , id]);
     }
-    
-    for (let i=0; i<result.length; i++) {
-        let [action, id] = result[i];
-        let nickname = nicknameMap.get(id);
+
+    for (let r of record) {
+        const [action, id] = r.split(" ");
+        const nickname = nicknameMap.get(id);
         
-        if (action === "Enter") 
-            answer.push(`${nickname}님이 들어왔습니다.`);
-        if (action === "Leave") 
-            answer.push(`${nickname}님이 나갔습니다.`);
+        if (action === "Enter") answer.push(`${nickname}님이 들어왔습니다.`);
+        if (action === "Leave") answer.push(`${nickname}님이 나갔습니다.`);
     }
-    
+
     return answer;
 }
