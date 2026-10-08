@@ -1,7 +1,4 @@
 function solution(video_len, pos, op_start, op_end, commands) {
-    //prev - 10초 전으로
-    //next - 10초 후로
-    //오프닝 구간인 경우 - 오프닝 끝나는 위치로
     
     //초단위로 변환하는 함수
     function transformTime(str) {
@@ -25,17 +22,13 @@ function solution(video_len, pos, op_start, op_end, commands) {
     //초기 위치가 오프닝 구간이라면 오프닝 끝나는 곳으로
     if (pos >= op_start && pos < op_end) pos = op_end;
 
-    for (let command of commands){
+    for (const command of commands) {
         if (command === "next") {
-            pos += 10;
-            if (pos > video_len) pos = video_len;
-        }
-            
-        else if (command === "prev") {
-            pos -= 10;
-            if (pos < 0) pos = 0;
-        }
-        
+            pos = Math.min(pos + 10, video_len);
+        } else {
+            pos = Math.max(pos - 10, 0);
+    }
+
         if (pos >= op_start && pos < op_end) pos = op_end;
     }
     
