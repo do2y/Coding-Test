@@ -1,45 +1,50 @@
 function solution(fees, records) {
+
     const [baseTime, baseFee, unitTime, unitFee] = fees;
-
-    const enterTimeDict = {}; 
-    const totalTimeDict = {};  
-
-    function toMin(time) {
-        const [h, m] = time.split(":").map(Number);
-        return h * 60 + m;
-    }
-
+    
+    const parking = new Map();
+    const totalParkingTime = {};
+    
     records.forEach(record => {
-        const [time, carNumber, action] = record.split(" ");
+        const [time, carNumber, status] = record.split(" ");
+        
+        const minutes = transformTime(time);
+        
+        if (status === "IN") parking.set(carNumber, minutes);
+        if (status === "OUT") {
+            let parkingTime = minutes - parking.get(carNumber);
+            totalParkingTime[carNumber] = (totalParkingTime[carNumber] || 0) + parkingTime;
+            
+            parking.delete(carNumber);
+        }   
+    });
+    
+    // parking에 남아있는것 = 출차된적 없는 차량
+    for (const [carNumber, entryTime] of parking) {
+        const minutes = transformTime("23:59");
 
-        if (action === "IN") {
-            enterTimeDict[carNumber] = toMin(time);
-        } else {
-            const inTime = enterTimeDict[carNumber];
-            const duration = toMin(time) - inTime;
-
-            totalTimeDict[carNumber] = (totalTimeDict[carNumber] || 0) + duration;
-
-            delete enterTimeDict[carNumber]; 
+        let parkingTime = minutes - parking.get(carNumber);
+        totalParkingTime[carNumber] = (totalParkingTime[carNumber] || 0) + parkingTime;
+    }
+    
+    const totalFee = {};
+    for (const [carNumber, time] of Object.entries(totalParkingTime)) {
+        let fee = baseFee;
+        
+        if (time > baseTime) {
+            fee = baseFee + Math.ceil((time - baseTime) / unitTime) * unitFee;
         }
-    });
+        
+        totalFee[carNumber] = fee;
+    }
+    
+    const answer = Object.entries(totalFee).sort((a, b) => Number(a[0]) - Number(b[0])).map(([key, value]) => value);
+    return answer;
 
-    Object.keys(enterTimeDict).forEach(carNumber => {
-        const inTime = enterTimeDict[carNumber];
-        const duration = (23 * 60 + 59) - inTime;
-
-        totalTimeDict[carNumber] = (totalTimeDict[carNumber] || 0) + duration;
-    });
-
-    const result = Object.keys(totalTimeDict)
-        .sort()
-        .map(carNumber => {
-            const totalTime = totalTimeDict[carNumber];
-
-            if (totalTime <= baseTime) return baseFee;
-
-            return baseFee + Math.ceil((totalTime - baseTime) / unitTime) * unitFee;
-        });
-
-    return result;
 }
+
+function transformTime(time) {
+    const [hour, min] = time.split(":").map(Number);
+    return (hour * 60) + min;
+}
+
