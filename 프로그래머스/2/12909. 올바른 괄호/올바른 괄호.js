@@ -1,14 +1,17 @@
-function solution(s){
-    let check = 0;
-    
-    for(let i=0; i<s.length; i++){
-        if(s[i] === "(")
-            check+=1;
-        else if(check >= 1 && s[i] === ")")
-            check-=1;
-        else 
-            return false;
+function solution(s) {
+    if (s[0] !== "(") return false;
+
+    const stack = [];
+
+    for (const c of s) {
+        if (c === "(") {
+            stack.push("(");
+        } else {
+            if (stack.length === 0) return false;
+
+            stack.pop();
+        }
     }
-    
-    return check == 0;
+
+    return stack.length === 0;
 }
