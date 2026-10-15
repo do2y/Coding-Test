@@ -1,4 +1,5 @@
 function solution(x, y, n) {
+    // x에서 숫자 y까지 도달하는 최소 연산 횟수
     const dp = Array(y + 1).fill(Infinity);
 
     dp[x] = 0;
