@@ -1,14 +1,13 @@
 function solution(name, yearning, photo) {
     
-    const scores = [];
+    const scoreMap = new Map(
+        name.map((person, index) => [person, yearning[index]])
+    );
     
-    photo.forEach(photoNames => {
-        
-        let yearningScore = photoNames
-        .reduce((totalScore, personName) => totalScore + (yearning[name.indexOf(personName)] ?? 0), 0);
-        
-        scores.push(yearningScore);
-    });
-    
-    return scores;
+    return photo.map(photoNames =>
+        photoNames.reduce(
+            (sum, person) => sum + (scoreMap.get(person) ?? 0),
+            0
+        )
+    );
 }
