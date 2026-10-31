@@ -1,10 +1,8 @@
 function solution(absolutes, signs) {
     
-
-    const transformedArr = absolutes.map((v, i) => {
-        let n = signs[i] ? 1 : -1;
-        return v * n;
-    });
-    return transformedArr.reduce((a,c) => a+c, 0);
+    return absolutes.reduce((a, c, i) => {
+        const sign = signs[i] ? 1 : -1;
+        return a + c * sign;
+    }, 0);
     
 }
