@@ -1,15 +1,14 @@
-function solution(sizes) { 
-    
-    let long = 0;
-    let short = 0;
-    
+function solution(sizes) {
+    let maxWidth = 0;
+    let maxHeight = 0;
+
     for (const [w, h] of sizes) {
-        let l = Math.max(w, h);
-        let s = Math.min(w, h);
-        
-        long = Math.max(long, l);
-        short = Math.max(short, s);
+        const width = Math.max(w, h);
+        const height = Math.min(w, h);
+
+        maxWidth = Math.max(maxWidth, width);
+        maxHeight = Math.max(maxHeight, height);
     }
-    
-    return long * short;
+
+    return maxWidth * maxHeight;
 }
