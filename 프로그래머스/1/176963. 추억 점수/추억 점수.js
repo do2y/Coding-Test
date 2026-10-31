@@ -1,15 +1,14 @@
 function solution(name, yearning, photo) {
-    let answer = [];
     
-    for(let i=0; i<photo.length; i++){
-        let result = 0;
-        for(let j=0; j<photo[i].length; j++){
-            let index = name.indexOf(photo[i][j]);
-            if(index != -1){
-                result += yearning[index]; 
-            }
-        }
-        answer.push(result);   
-    }
-    return answer;
+    const scores = [];
+    
+    photo.forEach(photoNames => {
+        
+        let yearningScore = photoNames
+        .reduce((totalScore, personName) => totalScore + (yearning[name.indexOf(personName)] ?? 0), 0);
+        
+        scores.push(yearningScore);
+    });
+    
+    return scores;
 }
