@@ -1,20 +1,19 @@
 function solution(priorities, location) {
     
-    let queue = priorities.map((priority, index) => ({ index, priority }));
-    let count = 0;
+    const queue = priorities.map((priority, idx) => ({idx, priority}));
     
-    while (queue.length > 0) {
-        const current = queue.shift();
-        const hasHigher = (queue.some((q) => q.priority > current.priority))
+    let cnt = 0;
+    
+    while (true) {
         
-        if (hasHigher) {
-            queue.push(current);
-        }
+        const currentProcess = queue.shift();
+        if (queue.some(v => v.priority > currentProcess.priority)) 
+            queue.push(currentProcess);
+            
         else {
-            count++;
-            if (current.index === location)
-                return count;
+            cnt++;
+            if (currentProcess.idx === location) return cnt;
         }
-    }
-    
+        
+    }    
 }
