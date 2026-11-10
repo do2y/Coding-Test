@@ -1,6 +1,6 @@
 function solution(priorities, location) {
 
-    let queue = priorities.map((priority, index) => ({ index, priority }));
+    const queue = priorities.map((priority, index) => ({ index, priority }));
     let count = 0;
 
     while (queue.length > 0) {
