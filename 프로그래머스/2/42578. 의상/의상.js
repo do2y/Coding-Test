@@ -1,19 +1,14 @@
 function solution(clothes) {
-  
-    const clothesDict = {};
+    let categoryCount = {};
     
-    clothes.forEach(([name, type]) => {
-        if (!clothesDict[type]) clothesDict[type] = [];
-        clothesDict[type].push(name);
-    });
-    
-    let product = 1;
-
-    Object.values(clothesDict).forEach(v => {
-        const count = v.length;
-        product *= (count + 1);
+    clothes.forEach(([_, cloth]) => {
+        categoryCount[cloth] = (categoryCount[cloth] || 0) + 1;
     });
 
-    return product - 1;
+    let answer = 1;
+    for (let key in categoryCount) {
+        answer *= categoryCount[key] + 1;
+    }
     
+    return answer - 1;
 }
