@@ -13,12 +13,9 @@ function solution(scoville, K) {
             let parent = Math.floor((idx - 1) / 2);
             
             if (heap[parent] <= value) break;
-            if (value < heap[parent]) {
-                let temp = heap[parent];
-                heap[parent] = value;
-                heap[idx] = temp;
-                idx = parent;
-            }
+    
+            [heap[parent], heap[idx]] = [heap[idx], heap[parent]];
+            idx = parent;
         }
     
     }
@@ -33,8 +30,8 @@ function solution(scoville, K) {
         
         //left, right를 비교해서 bubble down.
         while(true) {
-            let left = idx * 2 + 1;
-            let right = idx * 2 + 2;
+            const left = idx * 2 + 1;
+            const right = idx * 2 + 2;
             let smallest = idx;  //더 작은 값을 추적
             
             if (left < heap.length && heap[left] < heap[idx])
@@ -44,10 +41,7 @@ function solution(scoville, K) {
             
             if (smallest === idx) break;
             
-            let temp = heap[idx];
-            heap[idx] = heap[smallest];
-            heap[smallest] = temp;
-            
+            [heap[idx], heap[smallest]] = [heap[smallest], heap[idx]];
             idx = smallest;
         }
        
