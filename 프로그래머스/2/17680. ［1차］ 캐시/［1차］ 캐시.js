@@ -1,33 +1,33 @@
 function solution(cacheSize, cities) {
-    const hit_time = 1;
-    const miss_time = 5;
+  
+    const cache = [];
+    let executionTime = 0;
     
-    let execution_time = 0;
-
-    let used = [];
+    const missTime = 5;
+    const hitTime = 1;
     
-    if (cacheSize === 0) 
-        return cities.length * miss_time;
+    if (cacheSize === 0) return cities.length * missTime;
     
-    cities.forEach((city) => {
-        city = city.toUpperCase();
+    cities.forEach(city =>{
+        city = city.toUpperCase(); 
         
-        
-        if (!used.includes(city)) {
-            if (used.length == cacheSize) {
-                used.shift();
-            }
-            used.push(city);
-            execution_time += miss_time;
+        if (!cache.includes(city)) {
+            if (cache.length === cacheSize) cache.shift();
+              
+            cache.push(city);
+            executionTime += missTime;
         }
+        
         else {
-            let index = used.indexOf(city);
-            used.splice(index, 1);
-            used.push(city);
-            execution_time += hit_time;
-
+            const index = cache.indexOf(city);
+            cache.splice(index, 1);
+            cache.push(city);
+            
+            executionTime += hitTime;
         }
+    
+        
     });
     
-    return execution_time;
+    return executionTime;
 }
