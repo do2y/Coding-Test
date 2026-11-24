@@ -1,15 +1,14 @@
 function solution(n, w, num) {
-    
     let removeCount = 0;
-    
-    while (num <= n) {
-        
-        const distanceToRowEnd = Math.ceil(num / w) * w - num;
-        num = num + (distanceToRowEnd * 2) + 1;
-    
+    let current = num;
+
+    while (current <= n) {
+        const rowEnd = Math.ceil(current / w) * w;
+        const distanceToRowEnd = rowEnd - current;
+
         removeCount++;
-          
+        current += distanceToRowEnd * 2 + 1;
     }
-    
+
     return removeCount;
 }
