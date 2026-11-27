@@ -1,27 +1,28 @@
 function solution(genres, plays) {
- 
+    
     const answer = [];
-    
     const playCountDict = {};
-    
+
     genres.forEach((v, i) => {
-        playCountDict[v] = (playCountDict[v] || 0) + plays[i];
-    });
-    
-    const sortedGenreCount = Object.entries(playCountDict).sort((a,b) =>  b[1] - a[1]);
-    
-    for (const [genre, _] of sortedGenreCount) {
-        const playsInGenre = [];
-        
-        for (let i=0; i<genres.length; i++) {
-            if (genres[i] === genre) {
-                playsInGenre.push(i);
-            }
+        if (!playCountDict[v]) {
+            playCountDict[v] = {
+                total: 0,
+                songs: []
+            };
         }
-        
-        const sortedPlaysInGenre = playsInGenre.sort((a,b) => plays[b] - plays[a]);
+
+        playCountDict[v].total += plays[i];
+        playCountDict[v].songs.push(i);
+    });
+
+    const sortedGenreCount = Object.entries(playCountDict)
+        .sort((a, b) => b[1].total - a[1].total);
+
+    for (const [genre, data] of sortedGenreCount) {
+        const sortedPlaysInGenre = data.songs
+            .sort((a, b) => plays[b] - plays[a] || a - b);
+
         answer.push(...sortedPlaysInGenre.slice(0, 2));
-    
     }
 
     return answer;
